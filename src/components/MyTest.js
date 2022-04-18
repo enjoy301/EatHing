@@ -47,7 +47,6 @@ const MyTest = (props) => {
   let delay = 10;
   let emojiSize = 80;
   let totalSize = emojiSize * foods.length;
-  let isFixed = false;
 
   useInterval(
     () => {
@@ -65,7 +64,6 @@ const MyTest = (props) => {
           }
           if (marginValue < until) {
             getResult();
-            isFixed = false;
             setCounting(false);
             setSpeed(6);
             setUntil(-999);
