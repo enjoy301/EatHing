@@ -61,3 +61,7 @@
   height: 50px;
   width: 50px;
 }
+
+.history .name {
+  font-family: "IM_Hyemin-Bold";
+}
