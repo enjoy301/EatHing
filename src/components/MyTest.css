@@ -45,3 +45,19 @@
   color: white;
   border: 0;
 }
+
+.history {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.line {
+  width: 1px;
+  background-color: #ffb800;
+}
+
+.item {
+  height: 50px;
+  width: 50px;
+}

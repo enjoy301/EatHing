@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-const History = () => {
+const History = ({ result }) => {
+  const [arr, setArr] = useState(["a", "b", "c"]);
+
+  useEffect(() => {
+    let newArr = arr;
+    newArr[0] = result[0];
+    setArr(newArr);
+  }, [arr, result]);
+
   return (
     <div className="history">
-      <div className="item">item1</div>
+      <div className="item">{arr[0]}</div>
       <span className="line"></span>
-      <div className="item">item2</div>
+      <div className="item">{arr[1]}</div>
       <span className="line"></span>
-      <div className="item">item3</div>
+      <div className="item">{arr[2]}</div>
     </div>
   );
 };

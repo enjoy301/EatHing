@@ -20,33 +20,38 @@ function useInterval(callback, delay) {
   }, [delay]); // delay가 바뀔 때마다 새로 실행된다.
 }
 
-const MyTest = (props) => {
+const MyTest = () => {
+  const [arr, setArr] = useState([
+    ["", ""],
+    ["", ""],
+    ["", ""],
+  ]);
   const [until, setUntil] = useState(-999);
   const [speed, setSpeed] = useState(6);
-  const [marginValue, setMarginValue] = useState("0");
-  const [marginTop, setMarginTop] = useState("0px");
+  const [marginValue, setMarginValue] = useState("80");
+  const [marginTop, setMarginTop] = useState("-80px");
   const [time, setTime] = useState(1500);
   const [rolling, setRolling] = useState(true);
   const [counting, setCounting] = useState(false);
   const slide = useRef();
   const foods = [
-    "🍒",
-    "🍉",
-    "🍊",
-    "🍓",
-    "🍇",
-    "🥝",
-    "🐶",
-    "🐱",
-    "🐭",
-    "🐹",
-    "🐰",
-    "🦊",
-    "🐻",
+    ["🍒", "체리"],
+    ["🍉", "수박"],
+    ["🍊", "오렌지"],
+    ["🍓", "딸기"],
+    ["🍇", "포도"],
+    ["🥝", "키위"],
+    ["🐶", "개"],
+    ["🐱", "냥"],
+    ["🐭", "쥐"],
+    ["🐹", "햄"],
+    ["🐰", "토끼"],
+    ["🦊", "팍스"],
+    ["🐻", "곰"],
   ];
   let delay = 10;
   let emojiSize = 80;
-  let totalSize = emojiSize * foods.length;
+  let totalSize = emojiSize * (foods.length + 1);
 
   useInterval(
     () => {
@@ -83,12 +88,15 @@ const MyTest = (props) => {
   );
 
   const getResult = () => {
-    props.setResult("a");
+    arr[2] = arr[1];
+    arr[1] = arr[0];
+    arr[0] = foods[((until - 45) / 80 - 1 + foods.length) % foods.length];
+    setArr(arr);
   };
 
   const changeMargin = () => {
     if (marginValue >= totalSize) {
-      setMarginValue(0);
+      setMarginValue(80);
     }
     let marginTop = "-" + marginValue.toString() + "px";
     setMarginTop(marginTop);
@@ -105,11 +113,13 @@ const MyTest = (props) => {
 
   const rendering = () => {
     const result = [];
-    result.push(<div key="f">{foods[foods.length - 1]}</div>);
+    result.push(<div key="f1">{foods[foods.length - 2][0]}</div>);
+    result.push(<div key="f2">{foods[foods.length - 1][0]}</div>);
     for (let j = 0; j < foods.length; j++) {
-      result.push(<div key={j.toString()}>{foods[j]}</div>);
+      result.push(<div key={j.toString()}>{foods[j][0]}</div>);
     }
-    result.push(<div key="l">{foods[0]}</div>);
+    result.push(<div key="l1">{foods[0][0]}</div>);
+    result.push(<div key="l2">{foods[1][0]}</div>);
     return result;
   };
 
@@ -123,7 +133,22 @@ const MyTest = (props) => {
       <button className="roll" onClick={onClick} disabled={counting}>
         {rolling ? "stop" : "roll"}
       </button>
-      {marginValue}
+      <div className="history">
+        <div className="item">
+          <div className="icon">{arr[0][0]}</div>
+          <div className="name">{arr[0][1]}</div>
+        </div>
+        <div className="line"></div>
+        <div className="item">
+          <div className="icon">{arr[1][0]}</div>
+          <div className="name">{arr[1][1]}</div>
+        </div>
+        <div className="line"></div>
+        <div className="item">
+          <div className="icon">{arr[2][0]}</div>
+          <div className="name">{arr[2][1]}</div>
+        </div>
+      </div>
     </div>
   );
 };
