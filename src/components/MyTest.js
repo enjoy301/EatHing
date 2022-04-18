@@ -20,10 +20,11 @@ function useInterval(callback, delay) {
   }, [delay]); // delay가 바뀔 때마다 새로 실행된다.
 }
 
-const MyTest = () => {
+const MyTest = (props) => {
+  const [until, setUntil] = useState(-999);
   const [speed, setSpeed] = useState(6);
-  const [marginValue, setMarginValue] = useState("925");
-  const [marginTop, setMarginTop] = useState("-925px");
+  const [marginValue, setMarginValue] = useState("0");
+  const [marginTop, setMarginTop] = useState("0px");
   const [time, setTime] = useState(1500);
   const [rolling, setRolling] = useState(true);
   const [counting, setCounting] = useState(false);
@@ -44,6 +45,9 @@ const MyTest = () => {
     "🐻",
   ];
   let delay = 10;
+  let emojiSize = 80;
+  let totalSize = emojiSize * foods.length;
+  let isFixed = false;
 
   useInterval(
     () => {
@@ -56,9 +60,16 @@ const MyTest = () => {
         setTime(time - 10);
 
         if (time < 0) {
-          setCounting(false);
-          setSpeed(6);
-          return;
+          if (until === -999) {
+            setUntil(Math.floor((marginValue - 45) / 80) * 80 + 45);
+          }
+          if (marginValue < until) {
+            getResult();
+            isFixed = false;
+            setCounting(false);
+            setSpeed(6);
+            setUntil(-999);
+          }
         } else if (time >= 0 && time < 500) {
           setSpeed(speed - 0.1);
         } else if (time >= 500 && time < 1000) {
@@ -73,9 +84,13 @@ const MyTest = () => {
     rolling || counting ? delay : null
   );
 
+  const getResult = () => {
+    props.setResult("a");
+  };
+
   const changeMargin = () => {
-    if (marginValue >= 1965) {
-      setMarginValue(925);
+    if (marginValue >= totalSize) {
+      setMarginValue(0);
     }
     let marginTop = "-" + marginValue.toString() + "px";
     setMarginTop(marginTop);
@@ -92,11 +107,11 @@ const MyTest = () => {
 
   const rendering = () => {
     const result = [];
-    for (let i = 0; i < 3; i++) {
-      for (let j = 0; j < foods.length; j++) {
-        result.push(<div key={i.toString() + j.toString()}>{foods[j]}</div>);
-      }
+    result.push(<div key="f">{foods[foods.length - 1]}</div>);
+    for (let j = 0; j < foods.length; j++) {
+      result.push(<div key={j.toString()}>{foods[j]}</div>);
     }
+    result.push(<div key="l">{foods[0]}</div>);
     return result;
   };
 
@@ -107,9 +122,10 @@ const MyTest = () => {
           {rendering()}
         </ul>
       </div>
-      <div className="roll" onClick={onClick} disabled={counting}>
+      <button className="roll" onClick={onClick} disabled={counting}>
         {rolling ? "stop" : "roll"}
-      </div>
+      </button>
+      {marginValue}
     </div>
   );
 };
