@@ -1,0 +1,46 @@
+@keyframes slide {
+  0% {
+    margin-top: -925px;
+  }
+  100% {
+    margin-top: -1965px;
+  }
+}
+
+.cont {
+  margin: 0 auto 0 auto;
+  border-radius: 15px !important;
+  border: 1.5px solid #ffd976 !important;
+  width: 241px;
+  height: 150px;
+  overflow: hidden;
+}
+
+.slide-box {
+  padding-left: 0;
+  margin: 0 auto 0 auto;
+  width: 200px;
+}
+
+.slide-box div {
+  margin: 0 auto 0 auto;
+  padding: 10px 0 10px 0;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+}
+
+.roll {
+  margin: 10px auto auto auto;
+  width: 215px;
+  cursor: pointer;
+  background-color: #ffb800;
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+  border-radius: 100px;
+  color: white;
+}
