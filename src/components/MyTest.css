@@ -8,15 +8,55 @@
 }
 
 .cont {
-  margin: 0 auto 0 auto;
-  border-radius: 15px !important;
-  border: 1.5px solid #ffd976 !important;
+  position: relative;
+  margin: 10px auto;
   width: 241px;
   height: 150px;
   overflow: hidden;
 }
 
+.pointer {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  position: absolute;
+  width: 150px;
+  height: 80px;
+  border-radius: 10px !important;
+  border: 2px solid #ffd976 !important;
+}
+
+.arrow {
+  top: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.left-arrow {
+  border-left: 20px solid #ffd976; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin: auto 0 auto 0;
+}
+
+.right-arrow {
+  right: 0px;
+  border-right: 20px solid #ffd976; 
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin: auto 0 auto 0;
+}
+
 .slide-box {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   padding-left: 0;
   margin: 0 auto 0 auto;
   width: 200px;
@@ -34,7 +74,8 @@
 }
 
 .roll {
-  margin: 10px auto auto auto;
+  font-family: "IM_Hyemin-Bold";
+  margin: 70px auto 90px auto;
   width: 215px;
   cursor: pointer;
   background-color: #ffb800;
@@ -50,18 +91,30 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  height: 100px;
 }
 
 .line {
-  width: 1px;
-  background-color: #ffb800;
+  border: 1px solid #ffb800;
 }
 
 .item {
-  height: 50px;
-  width: 50px;
+  height: auto;
+  width: 30%;
 }
 
-.history .name {
+.icon {
+  margin: 10px auto;
+  text-align: center;
+  font-size: 35px;
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  background-color: rgba(255, 217, 118, 0.3);
+}
+
+.name {
   font-family: "IM_Hyemin-Bold";
+  color: #ffb800;
+  font-size: 20px;
 }

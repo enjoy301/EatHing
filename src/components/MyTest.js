@@ -22,9 +22,9 @@ function useInterval(callback, delay) {
 
 const MyTest = () => {
   const [arr, setArr] = useState([
-    ["", ""],
-    ["", ""],
-    ["", ""],
+    [" ", "???"],
+    [" ", "???"],
+    [" ", "???"],
   ]);
   const [until, setUntil] = useState(-999);
   const [speed, setSpeed] = useState(6);
@@ -126,12 +126,15 @@ const MyTest = () => {
   return (
     <div>
       <div className="cont">
+        <div className="arrow left-arrow"></div>
+        <div className="pointer"></div>
+        <div className="arrow right-arrow"></div>
         <ul className="slide-box" ref={slide} style={{ marginTop: marginTop }}>
           {rendering()}
         </ul>
       </div>
       <button className="roll" onClick={onClick} disabled={counting}>
-        {rolling ? "stop" : "roll"}
+        {rolling ? "멈춰!" : "돌려!"}
       </button>
       <div className="history">
         <div className="item">
