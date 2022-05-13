@@ -1,10 +1,6 @@
-@keyframes slide {
-  0% {
-    margin-top: -925px;
-  }
-  100% {
-    margin-top: -1965px;
-  }
+.title {
+  color: #6a6a6a;
+  margin: 60px auto 75px auto;
 }
 
 .cont {
@@ -37,7 +33,7 @@
 }
 
 .left-arrow {
-  border-left: 20px solid #ffd976; 
+  border-left: 20px solid #ffd976;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   margin: auto 0 auto 0;
@@ -45,7 +41,7 @@
 
 .right-arrow {
   right: 0px;
-  border-right: 20px solid #ffd976; 
+  border-right: 20px solid #ffd976;
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   margin: auto 0 auto 0;

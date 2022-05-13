@@ -125,6 +125,7 @@ const MyTest = () => {
 
   return (
     <div>
+      <p className="title">오늘 점심 메뉴는?</p>
       <div className="cont">
         <div className="arrow left-arrow"></div>
         <div className="pointer"></div>
