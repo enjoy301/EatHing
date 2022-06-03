@@ -9,9 +9,11 @@ const Background = () => {
     height: window.innerHeight,
     divide8Height: window.innerHeight / 8,
   });
+  let direction = -1;
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
+
     return () => {
       window.removeEventListener("resize", onResize);
     };
@@ -25,70 +27,25 @@ const Background = () => {
     });
   }, 500);
 
-  const rendering = () => {
-    return (
-      <>
-        <OneLine
-          items={["a", "b"]}
-          direction={1}
-          speed={1}
-          delay={1}
-          divide8Height={window.innerHeight / 8}
-        ></OneLine>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "blue",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "black",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "white",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "yellow",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "green",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "pink",
-          }}
-        ></div>
-        <div
-          style={{
-            height: windowSize.divide8Height,
-            width: "100%",
-            backgroundColor: "brown",
-          }}
-        ></div>
-      </>
-    );
-  };
-
-  return <div className="background">{rendering()}</div>;
+  return (
+    <div className="background">
+      {[...Array(8)].map((item, index) => {
+        direction *= -1;
+        let delay = Math.floor(Math.random() * 100);
+        let speed = Math.floor(Math.random() * 5 + 1);
+        return (
+          <OneLine
+            key={index}
+            width={windowSize.width}
+            divide8Height={windowSize.divide8Height}
+            direction={direction}
+            speed={speed}
+            delay={delay}
+          ></OneLine>
+        );
+      })}
+    </div>
+  );
 };
 
 export default Background;
