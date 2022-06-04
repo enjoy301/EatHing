@@ -1,9 +1,8 @@
 import react, { useState, useEffect } from "react";
 import "./OneLine.css";
-import styled from "styled-components";
-import { keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const OneLine = ({ width, divide8Height, direction }) => {
+const OneLine = ({ items, index, width, divide8Height, direction }) => {
   const [marginRightSize, setMarginRightSize] = useState(divide8Height * 2);
   const [boxCount, setBoxCount] = useState(1);
   const [boxSize, setBoxSize] = useState(divide8Height * 0.9);
@@ -41,60 +40,64 @@ const OneLine = ({ width, divide8Height, direction }) => {
     }
   };
 
-  const boxMove = keyframes`
-    0% {
-      left: 0px;
-    }
-    100% {
-      left: ${(boxSize + marginRightSize) * 2 + "px"};
-    }
-  `;
-
-  const BoxContainer = styled.div`
-    width: 200%;
-    height: ${divide8Height + "px"};
-    position: relative;
-    display: flex;
-    align-items: center;
-    animation: ${boxMove} 4s infinite linear
-      ${direction === 1 ? "normal" : "reverse"};
-  `;
-
-  const Box = styled.div`
-    width: ${boxSize + "px"};
-    height: ${boxSize + "px"};
-    position: absolute;
-    // border: 1px solid black;
-    text-align: center;
-    align-items: center;
-    margin: 0;
-    font-size: ${boxSize + "px"};
-    left: ${(props) => calculateLeft(props.index)};
-  `;
-
   return (
-    <BoxContainer>
-      <Box className="horizon-item" index={-2}>
-        🍒
-      </Box>
-      <Box className="horizon-item" index={-1}>
-        🐶
-      </Box>
-      {[...Array(boxCount)].map((item, index) => {
+    <BoxContainer
+      index={index}
+      divide8Height={divide8Height}
+      direction={direction}
+      boxSize={boxSize}
+      marginRightSize={marginRightSize}
+    >
+      {[...Array(boxCount + 4)].map((item, index) => {
         return (
-          <Box key={index} className="horizon-item" index={index}>
-            {index % 2 === 0 ? "🍒" : "🐶"}
+          <Box
+            key={index - 2}
+            className="horizon-item"
+            index={index - 2}
+            calculateLeft={calculateLeft}
+            boxSize={boxSize}
+          >
+            {items[index % 2]}
           </Box>
         );
       })}
-      <Box className="horizon-item" index={101}>
-        {boxCount % 2 === 0 ? "🍒" : "🐶"}
-      </Box>
-      <Box className="horizon-item" index={102}>
-        {boxCount % 2 === 1 ? "🍒" : "🐶"}
-      </Box>
     </BoxContainer>
   );
 };
+
+const boxMove = (props) => keyframes`
+  0% {
+    left: 0px;
+  }
+  100% {
+    left: ${(props.boxSize + props.marginRightSize) * 2 + "px"};
+  }
+`;
+
+const BoxContainer = styled.div`
+  width: 200%;
+  height: ${(props) => props.divide8Height + "px"};
+  position: relative;
+  display: flex;
+  align-items: center;
+  left: ${(props) =>
+    props.index % 2 === 1
+      ? (props.boxSize + props.marginRightSize) / 2 + "px"
+      : "0px"};
+  // animation: ${(props) => boxMove(props)} 4s infinite linear
+  //   ${(props) => (props.direction === 1 ? "normal" : "reverse")};
+`;
+
+const Box = styled.div`
+  width: ${(props) => props.boxSize + "px"};
+  height: ${(props) => props.boxSize + "px"};
+  position: absolute;
+  // border: 1px solid black;
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  font-size: ${(props) => props.boxSize * 0.9 + "px"};
+  left: ${(props) => props.calculateLeft(props.index)};
+`;
 
 export default OneLine;

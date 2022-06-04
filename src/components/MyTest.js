@@ -134,7 +134,7 @@ const MyTest = () => {
           {rendering()}
         </ul>
       </div>
-      <button className="roll" onClick={onClick} disabled={counting}>
+      <button className="mybtn" onClick={onClick} disabled={counting}>
         {rolling ? "멈춰!" : "돌려!"}
       </button>
       <div className="history">

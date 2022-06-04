@@ -10,6 +10,16 @@ const Background = () => {
     divide8Height: window.innerHeight / 8,
   });
   let direction = -1;
+  const items = [
+    ["🍊", "🌽"],
+    ["🍦", "🍦"],
+    ["🌮", "🍙"],
+    ["🍫", "🍿"],
+    ["🍜", "🍣"],
+    ["🍔", "🍕"],
+    ["🌭", "🥟"],
+    ["🍭", "☕️"],
+  ];
 
   useEffect(() => {
     window.addEventListener("resize", onResize);
@@ -33,7 +43,9 @@ const Background = () => {
         direction *= -1;
         return (
           <OneLine
+            items={items[index]}
             key={index}
+            index={index}
             width={windowSize.width}
             divide8Height={windowSize.divide8Height}
             direction={direction}
