@@ -65,7 +65,7 @@ const OneLine = ({ items, index, width, divide8Height, direction }) => {
   );
 };
 
-const boxMove = (props) => keyframes`
+const boxContainerMove = (props) => keyframes`
   0% {
     left: 0px;
   }
@@ -84,8 +84,8 @@ const BoxContainer = styled.div`
     props.index % 2 === 1
       ? (props.boxSize + props.marginRightSize) / 2 + "px"
       : "0px"};
-  // animation: ${(props) => boxMove(props)} 4s infinite linear
-  //   ${(props) => (props.direction === 1 ? "normal" : "reverse")};
+  animation: ${(props) => boxContainerMove(props)} 8s infinite linear
+    ${(props) => (props.direction === 1 ? "normal" : "reverse")};
 `;
 
 const Box = styled.div`
@@ -96,7 +96,7 @@ const Box = styled.div`
   text-align: center;
   align-items: center;
   margin: 0;
-  font-size: ${(props) => props.boxSize * 0.9 + "px"};
+  font-size: ${(props) => props.boxSize * 0.5 + "px"};
   left: ${(props) => props.calculateLeft(props.index)};
 `;
 
