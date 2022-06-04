@@ -31,16 +31,12 @@ const Background = () => {
     <div className="background">
       {[...Array(8)].map((item, index) => {
         direction *= -1;
-        let delay = Math.floor(Math.random() * 100);
-        let speed = Math.floor(Math.random() * 5 + 1);
         return (
           <OneLine
             key={index}
             width={windowSize.width}
             divide8Height={windowSize.divide8Height}
             direction={direction}
-            speed={speed}
-            delay={delay}
           ></OneLine>
         );
       })}
